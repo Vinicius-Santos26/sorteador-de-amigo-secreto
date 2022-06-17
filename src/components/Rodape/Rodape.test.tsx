@@ -11,10 +11,17 @@ jest.mock('state/hooks/useListaDeParticipantes', () => {
 })
 
 const mockDeNavegacao = jest.fn();
+const mockSorteio = jest.fn();
 
 jest.mock('react-router-dom', () => {
     return {
         useNavigate: () => mockDeNavegacao
+    }
+})
+
+jest.mock('state/hooks/useSorteador', () => {
+    return {
+        useSorteador: () => mockSorteio
     }
 })
 
@@ -59,6 +66,7 @@ describe('Comportamento Rodape', () => {
 
             expect(mockDeNavegacao).toHaveBeenCalledTimes(1);
             expect(mockDeNavegacao).toBeCalledWith('/sorteio');
+            expect(mockSorteio).toBeCalledTimes(1);
         })
     })
 
